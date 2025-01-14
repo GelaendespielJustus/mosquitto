@@ -9,6 +9,10 @@ ENV VERSION=2.0.19 \
     LWS_VERSION=4.2.1 \
     LWS_SHA256=842da21f73ccba2be59e680de10a8cce7928313048750eb6ad73b6fa50763c51
 
+chmod +x docker-entrypoint.sh
+chmod +x mosquitto-no-auth.conf
+
+
 RUN set -x && \
     apk --no-cache add --virtual build-deps \
         build-base \
@@ -99,7 +103,8 @@ RUN set -x && \
 VOLUME ["/mosquitto/data", "/mosquitto/log"]
 
 # Set up the entry point script and default command
-COPY docker-entrypoint.sh mosquitto-no-auth.conf /
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+COPY mosquitto-no-auth.conf /mosquitto-no-auth.conf
 EXPOSE 1883
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["/usr/sbin/mosquitto", "-c", "/mosquitto/config/mosquitto.conf"]

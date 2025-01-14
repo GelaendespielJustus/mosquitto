@@ -9,10 +9,6 @@ ENV VERSION=2.0.19 \
     LWS_VERSION=4.2.1 \
     LWS_SHA256=842da21f73ccba2be59e680de10a8cce7928313048750eb6ad73b6fa50763c51
 
-chmod +x docker-entrypoint.sh
-chmod +x mosquitto-no-auth.conf
-
-
 RUN set -x && \
     apk --no-cache add --virtual build-deps \
         build-base \
